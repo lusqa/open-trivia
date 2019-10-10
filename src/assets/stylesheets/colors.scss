@@ -1,0 +1,18 @@
+$primary: #343c58;
+
+$success: #32CB82;
+$error: #FF4F4F;
+
+$ink: #1E2124;
+$inkLight: #53595F;
+
+$white: #FFFFFF;
+
+
+:export {
+  primary: $primary;
+  success: $success;
+  error: $error;
+  ink: $ink;
+  white: $white;
+}
