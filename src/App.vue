@@ -1,6 +1,6 @@
 <template>
   <div id="app">
-    <Header label="Teste Dev Frontend" />
+    <Header id="header" label="Teste Dev Frontend" />
     <router-view />
   </div>
 </template>
@@ -15,4 +15,8 @@ export default {
 };
 </script>
 
-<style lang="scss"></style>
+<style lang="scss">
+#app {
+  font-family: "Avenir", sans-serif;
+}
+</style>

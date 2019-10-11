@@ -1,6 +1,6 @@
 <template>
-  <header class="header">
-    <span class="header__label">{{ label }}</span>
+  <header class="header" :id="id">
+    <span class="header__label" :id="id + 'Label'">{{ label }}</span>
   </header>
 </template>
 
@@ -8,6 +8,10 @@
 export default {
   name: "Header",
   props: {
+    id: {
+      type: String,
+      required: true
+    },
     label: {
       type: String,
       required: true
@@ -25,7 +29,6 @@ $primary: #343c58;
   background-color: $primary;
 }
 .header__label {
-  font-family: "Avenir", sans-serif;
   font-size: 18px;
   line-height: 24px;
   color: #ffffff;
