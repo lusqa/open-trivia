@@ -1,15 +1,9 @@
 <template>
-  <div class="home">
-    <FeedbackDialog id="feedbackDialog" status="correct" />
-  </div>
+  <div class="home"></div>
 </template>
 
 <script>
-import FeedbackDialog from "@/components/FeedbackDialog";
 export default {
-  name: "Home",
-  components: {
-    FeedbackDialog
-  }
+  name: "Home"
 };
 </script>
