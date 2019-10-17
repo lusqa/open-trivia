@@ -1,15 +1,23 @@
 <template>
   <div id="app">
-    <Header id="header" label="Teste Dev Frontend" />
-    <router-view />
+    <PageTemplate>
+      <template slot="header">
+        <Header />
+      </template>
+      <template slot="content">
+        <router-view />
+      </template>
+    </PageTemplate>
   </div>
 </template>
 
 <script>
+import PageTemplate from "@/partials/PageTemplate";
 import Header from "@/components/Header";
 export default {
   name: "App",
   components: {
+    PageTemplate,
     Header
   }
 };
@@ -23,6 +31,7 @@ body {
   margin: 0;
 }
 #app {
+  height: 100%;
   font-family: "Avenir", sans-serif;
 }
 </style>
