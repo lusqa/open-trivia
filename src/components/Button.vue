@@ -9,7 +9,7 @@
 
 <script>
 export default {
-  name: "FeedbackDialog",
+  name: "Button",
   inheritAttrs: false,
   props: {
     id: {

@@ -10,11 +10,11 @@ export default {
   props: {
     id: {
       type: String,
-      required: true
+      default: "header"
     },
     label: {
       type: String,
-      required: true
+      default: "Teste Dev Frontend"
     }
   }
 };

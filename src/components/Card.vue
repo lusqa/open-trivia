@@ -1,12 +1,12 @@
 <template>
-  <div class="card">
+  <div class="card" @click="$emit('click')">
     <span class="card__label">{{ label }}</span>
   </div>
 </template>
 
 <script>
 export default {
-  name: "FeedbackDialog",
+  name: "Card",
   props: {
     id: {
       type: String,
@@ -24,12 +24,11 @@ export default {
 <style lang="scss" scoped>
 @import "@/assets/stylesheets/colors.scss";
 
-$bg-color: #0467db;
-
 .card {
   display: flex;
   width: 239px;
   height: 104px;
+  background-color: $white;
   border-radius: 8px;
   border: 1px solid #e4e4e6;
   align-items: flex-end;
