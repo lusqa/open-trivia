@@ -1,6 +1,7 @@
 <template>
   <div class="trivia">
-    <h2 class="page-title">{{}}</h2>
+    <h2 class="page-title">{{ category }}</h2>
+    <div></div>
   </div>
 </template>
 
@@ -8,35 +9,20 @@
 import { mapState, mapActions } from "vuex";
 
 export default {
-  name: "FeedbackDialog",
+  name: "Trivia",
   props: {
-    id: {
-      type: String,
-      required: true
-    },
     category: {
       type: String,
-      required: true,
-      validator(value) {
-        return [
-          "History",
-          "Mythology",
-          "Geography",
-          "Sports",
-          "Politics",
-          "General Knowledge"
-        ].includes(value);
-      }
+      required: true
     }
   },
   data() {
     return {
-      question: undefined
+      actualQuestion: undefined
     };
   },
   async created() {
-    await this.getQuestions("History");
-    console.log({ questions: this.questions });
+    await this.getQuestions(this.category);
   },
   computed: {
     ...mapState("trivia", ["questions"])
