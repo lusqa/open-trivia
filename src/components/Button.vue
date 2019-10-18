@@ -1,6 +1,12 @@
 <template>
   <div class="button__container">
-    <button v-bind="$attrs" v-on="$listeners" :id="id" class="button">
+    <button
+      v-bind="buttonAttrs"
+      v-on="$listeners"
+      :id="id"
+      class="button"
+      :class="{ 'button--disabled': disabled }"
+    >
       <span class="button__label">{{ label }}</span>
       <slot name="right-icon"></slot>
     </button>
@@ -16,12 +22,23 @@ export default {
       type: String,
       required: true
     },
+    disabled: {
+      type: Boolean,
+      default: false
+    },
     label: {
       type: String,
       required: true
     }
   },
-  computed: {}
+  computed: {
+    buttonAttrs() {
+      return {
+        ...this.$attrs,
+        disabled: this.disabled
+      };
+    }
+  }
 };
 </script>
 
@@ -37,13 +54,17 @@ $bg-color: #0467db;
   .button {
     width: 100%;
     height: 100%;
-    background: $bg-color;
     border: none;
     display: flex;
+    background-color: $bg-color;
     justify-content: space-between;
     align-items: center;
     padding: 0 24px;
     border-radius: 8px;
+
+    &--disabled {
+      background-color: #c9cccf;
+    }
 
     &__label {
       font-size: 16px;

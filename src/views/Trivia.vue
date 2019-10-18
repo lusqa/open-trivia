@@ -4,8 +4,8 @@
       <h2 class="category__header__title">{{ category }}</h2>
       <span class="category__header__close">Fechar</span>
     </div>
-    <div class="question__card">
-      <div class="question__header">
+    <div class="card">
+      <div class="card__header">
         <h3>Question {{ actualIndex + 1 }}</h3>
         <span>{{ actualQuestion.difficulty }}</span>
       </div>
@@ -24,6 +24,14 @@
             @question-selected="questionSelected = arguments[0]"
           />
         </div>
+        <div class="card__footer">
+          <Button
+            id="answerButton"
+            label="Responder"
+            :disabled="questionSelected === -1"
+            @click="onAnswerClick"
+          />
+        </div>
       </div>
     </div>
   </div>
@@ -32,11 +40,13 @@
 <script>
 import { mapState, mapActions } from "vuex";
 import QuestionCard from "@/components/QuestionCard";
+import Button from "@/components/Button";
 
 export default {
   name: "Trivia",
   components: {
-    QuestionCard
+    QuestionCard,
+    Button
   },
   props: {
     category: {
@@ -65,7 +75,10 @@ export default {
     }
   },
   methods: {
-    ...mapActions("trivia", ["getQuestions"])
+    ...mapActions("trivia", ["getQuestions"]),
+    onAnswerClick() {
+      console.log({ answer: this.options[this.questionSelected] });
+    }
   }
 };
 </script>
@@ -107,13 +120,12 @@ h4 {
   }
 }
 
-.question {
-  &__card {
-    background: #fff;
-    display: flex;
-    flex-direction: column;
-    padding: 24px;
-  }
+.card {
+  background: #fff;
+  display: flex;
+  flex-direction: column;
+  padding: 24px;
+  border-radius: 8px;
 
   &__header {
     display: flex;
@@ -125,6 +137,11 @@ h4 {
     color: #1e2124;
     font-size: 16px;
     letter-spacing: 0.2px;
+  }
+
+  &__footer {
+    display: flex;
+    justify-content: center;
   }
 }
 </style>
