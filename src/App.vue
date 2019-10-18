@@ -24,6 +24,7 @@ export default {
 </script>
 
 <style lang="scss">
+@import "@/assets/stylesheets/fonts.scss";
 html,
 body {
   height: 100%;

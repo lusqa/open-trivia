@@ -28,6 +28,8 @@ export default {
   }
 
   &__content {
+    display: flex;
+    justify-content: center;
     flex: 1;
     background: #e5e5e5;
     padding: 16px;
