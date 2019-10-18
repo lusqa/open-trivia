@@ -1,52 +1,62 @@
 <template>
-  <div class="trivia" v-if="actualQuestion">
-    <div class="category__header">
-      <h2 class="category__header__title">{{ category }}</h2>
-      <span class="category__header__close">Fechar</span>
-    </div>
-    <div class="card">
-      <div class="card__header">
-        <h3>Question {{ actualIndex + 1 }}</h3>
-        <span>{{ actualQuestion.difficulty }}</span>
+  <div class="trivia__container">
+    <div class="trivia" v-if="actualQuestion">
+      <div class="category__header">
+        <h2 class="category__header__title">{{ category }}</h2>
+        <span class="category__header__close">Fechar</span>
       </div>
-      <div class="question">
-        <h4 class="question__text">{{ actualQuestion.question }}</h4>
-        <div
-          class="question__options"
-          v-for="(option, index) in options"
-          :key="index"
-        >
-          <QuestionCard
-            id="aa"
-            :active="questionSelected === index"
-            :index="index"
-            :label="option"
-            @question-selected="questionSelected = arguments[0]"
-          />
+      <div class="card">
+        <div class="card__header">
+          <h3>Question {{ actualIndex + 1 }}</h3>
+          <span>{{ actualQuestion.difficulty }}</span>
         </div>
-        <div class="card__footer">
-          <Button
-            id="answerButton"
-            label="Responder"
-            :disabled="questionSelected === -1"
-            @click="onAnswerClick"
-          />
+        <div class="question">
+          <h4 class="question__text">{{ actualQuestion.question }}</h4>
+          <div
+            class="question__options"
+            v-for="(option, index) in options"
+            :key="index"
+          >
+            <QuestionCard
+              id="aa"
+              :active="questionSelected === index"
+              :index="index"
+              :label="option"
+              @question-selected="questionSelected = arguments[0]"
+            />
+          </div>
+          <div class="card__footer">
+            <Button
+              id="answerButton"
+              label="Responder"
+              :disabled="questionSelected === -1"
+              @click="onAnswerClick"
+            />
+          </div>
         </div>
       </div>
     </div>
+    <FeedbackDialog
+      v-if="isDialogVisible"
+      id="aaaa"
+      :status="isCorrectAnswer"
+      @advance-click="onAdvanceClick"
+    />
   </div>
 </template>
 
 <script>
 import { mapState, mapActions } from "vuex";
 import QuestionCard from "@/components/QuestionCard";
+import FeedbackDialog from "@/components/FeedbackDialog";
 import Button from "@/components/Button";
 
 export default {
   name: "Trivia",
   components: {
     QuestionCard,
-    Button
+    Button,
+    FeedbackDialog
   },
   props: {
     category: {
@@ -58,7 +68,8 @@ export default {
     return {
       actualIndex: 0,
       actualQuestion: "",
-      questionSelected: -1
+      questionSelected: -1,
+      isDialogVisible: false
     };
   },
   async created() {
@@ -72,11 +83,26 @@ export default {
         ...this.actualQuestion.incorrect_answers,
         this.actualQuestion.correct_answer
       ];
+    },
+    isCorrectAnswer() {
+      if (
+        this.options[this.questionSelected] ===
+        this.actualQuestion.correct_answer
+      ) {
+        return "correct";
+      } else {
+        return "wrong";
+      }
     }
   },
   methods: {
     ...mapActions("trivia", ["getQuestions"]),
     onAnswerClick() {
+      this.isDialogVisible = true;
+      console.log({ answer: this.options[this.questionSelected] });
+    },
+    onAdvanceClick() {
+      this.isDialogVisible = false;
       console.log({ answer: this.options[this.questionSelected] });
     }
   }

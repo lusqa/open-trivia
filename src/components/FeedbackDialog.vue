@@ -2,7 +2,11 @@
   <div class="feedback-dialog" :class="[border]">
     <img class="feedback-dialog__image" :id="id + 'Image'" :src="image" />
     <span class="feedback-dialog__label" :id="id + 'Label'">{{ label }}</span>
-    <Button :id="id + 'AdvanceButton'" label="Avançar" @click="advance">
+    <Button
+      :id="id + 'AdvanceButton'"
+      label="Avançar"
+      @click="$emit('advance-click')"
+    >
       <template slot="right-icon">
         <img src="../assets/images/arrow_right.svg" />
       </template>
@@ -31,11 +35,6 @@ export default {
       validator(value) {
         return ["correct", "wrong"].includes(value);
       }
-    }
-  },
-  methods: {
-    advance() {
-      console.log("aaaa");
     }
   },
   computed: {
