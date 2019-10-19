@@ -1,16 +1,19 @@
 <template>
-  <div class="feedback-dialog" :class="[border]">
-    <img class="feedback-dialog__image" :id="id + 'Image'" :src="image" />
-    <span class="feedback-dialog__label" :id="id + 'Label'">{{ label }}</span>
-    <Button
-      :id="id + 'AdvanceButton'"
-      label="Avançar"
-      @click="$emit('advance-click')"
-    >
-      <template slot="right-icon">
-        <img src="../assets/images/arrow_right.svg" />
-      </template>
-    </Button>
+  <div class="feedback-dialog__container">
+    <div class="overlay" @touchmove="$event.preventDefault()" />
+    <div class="feedback-dialog" :class="[border]">
+      <img class="feedback-dialog__image" :id="id + 'Image'" :src="image" />
+      <span class="feedback-dialog__label" :id="id + 'Label'">{{ label }}</span>
+      <Button
+        :id="id + 'AdvanceButton'"
+        label="Avançar"
+        @click="$emit('advance-click')"
+      >
+        <template slot="right-icon">
+          <img src="../assets/images/arrow_right.svg" />
+        </template>
+      </Button>
+    </div>
   </div>
 </template>
 
@@ -69,6 +72,17 @@ export default {
 $correct: #32cb82;
 $wrong: #ff4f4f;
 
+.feedback-dialog__container {
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
 .feedback-dialog {
   display: flex;
   flex-direction: column;
@@ -77,6 +91,8 @@ $wrong: #ff4f4f;
   height: 228px;
   width: 328px;
   border-radius: 8px;
+  z-index: 102;
+  background-color: $white;
 
   &__label {
     font-size: 24px;
@@ -93,5 +109,19 @@ $wrong: #ff4f4f;
   &--correct {
     border: 3px solid $correct;
   }
+}
+
+/* Overlay */
+.overlay {
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  pointer-events: auto;
+  touch-action: none;
+  z-index: 101;
+  background-color: #1e2124;
+  opacity: 0.5;
 }
 </style>
