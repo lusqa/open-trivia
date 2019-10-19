@@ -16,6 +16,10 @@ export default {
       const { questions } = state;
       const newValue = [...questions, ...value];
       state.questions.splice(0, questions.length, ...newValue);
+    },
+    resetQuestions(state) {
+      const { questions } = state;
+      state.questions.splice(0, questions.length);
     }
   },
   actions: {

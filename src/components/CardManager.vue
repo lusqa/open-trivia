@@ -53,10 +53,10 @@ export default {
 .card-manager {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
-  grid-gap: 12px;
+  grid-column-gap: 5px;
 
-  @media (max-width: 576px) {
-    grid-template-columns: repeat(3, 1fr);
+  @media (min-width: 375px) and (max-width: 576px) {
+    grid-template-columns: repeat(2, 1fr);
   }
 
   @media (max-width: 375px) {

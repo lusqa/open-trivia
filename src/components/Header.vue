@@ -14,7 +14,7 @@ export default {
     },
     label: {
       type: String,
-      default: "Teste Dev Frontend"
+      default: "Open Trivia"
     }
   }
 };

@@ -6,8 +6,8 @@
       <span class="feedback-dialog__label" :id="id + 'Label'">{{ label }}</span>
       <Button
         :id="id + 'AdvanceButton'"
-        label="Avançar"
-        @click="$emit('advance-click')"
+        label="Next"
+        @click="$emit('next-click')"
       >
         <template slot="right-icon">
           <img src="../assets/images/arrow_right.svg" />
@@ -66,6 +66,7 @@ $wrong: #ff4f4f;
   display: flex;
   align-items: center;
   justify-content: center;
+  padding: 0 16px;
 }
 
 .feedback-dialog {

@@ -1,6 +1,6 @@
 <template>
   <div class="home">
-    <h1 class="page-title">Categorias</h1>
+    <h1 class="page-title">Categories</h1>
     <CardManager id="cardManager" :categories="categories" />
   </div>
 </template>
@@ -30,7 +30,8 @@ export default {
 @import "@/assets/stylesheets/colors.scss";
 
 .home {
-  width: 75%;
+  width: 100%;
+  padding: 16px;
 }
 .page-title {
   color: $ink;

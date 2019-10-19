@@ -5,7 +5,10 @@
       v-on="$listeners"
       :id="id"
       class="button"
-      :class="{ 'button--disabled': disabled }"
+      :class="{
+        'button--disabled': disabled,
+        'button--icon': !!$slots['right-icon']
+      }"
     >
       <span class="button__label">{{ label }}</span>
       <slot name="right-icon"></slot>
@@ -55,12 +58,16 @@ $bg-color: #0467db;
     width: 100%;
     height: 100%;
     border: none;
-    display: flex;
     background-color: $bg-color;
-    justify-content: space-between;
-    align-items: center;
+
     padding: 0 24px;
     border-radius: 8px;
+
+    &--icon {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
 
     &--disabled {
       background-color: #c9cccf;
