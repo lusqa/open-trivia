@@ -30,7 +30,7 @@ export default {
 @import "@/assets/stylesheets/colors.scss";
 
 .home {
-  width: 100%;
+  width: 75%;
 }
 .page-title {
   color: $ink;

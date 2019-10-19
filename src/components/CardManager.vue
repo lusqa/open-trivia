@@ -34,10 +34,14 @@ export default {
   },
   methods: {
     onCardClick(category) {
-      this.$router.push({
-        name: "trivia",
-        params: { category: category.name }
-      });
+      if (window.localStorage.getItem(category.name)) {
+        alert("Category Answered");
+      } else {
+        this.$router.push({
+          name: "trivia",
+          params: { category: category.name }
+        });
+      }
     }
   }
 };

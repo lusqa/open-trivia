@@ -32,35 +32,20 @@ export default {
       type: String,
       required: true
     },
-    status: {
-      type: String,
-      required: true,
-      validator(value) {
-        return ["correct", "wrong"].includes(value);
-      }
+    isCorrect: {
+      type: Boolean,
+      required: true
     }
   },
   computed: {
     image() {
-      const source = {
-        wrong: feedbackWrongImage,
-        correct: feedbackCorrectImage
-      };
-      return source[this.status];
+      return this.isCorrect ? feedbackCorrectImage : feedbackWrongImage;
     },
     border() {
-      const color = {
-        wrong: "border--wrong",
-        correct: "border--correct"
-      };
-      return color[this.status];
+      return this.isCorrect ? "border--correct" : "border--wrong";
     },
     label() {
-      const label = {
-        wrong: "Você errou!",
-        correct: "Você acertou!"
-      };
-      return label[this.status];
+      return this.isCorrect ? "You get!" : "You suck!";
     }
   }
 };

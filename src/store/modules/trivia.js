@@ -4,53 +4,52 @@ export default {
   namespaced: true,
   state: {
     categories: [],
-    questions: {
-      0: [],
-      1: [],
-      2: []
-    }
+    questions: []
   },
   getters: {},
   mutations: {
     setCategories(state, value) {
       const { categories } = state;
-      state.categories.splice(0, categories, ...value);
+      state.categories.splice(0, categories.length, ...value);
     },
     setQuestions(state, value) {
-      state.questions = {
-        ...state.questions,
-        ...value
-      };
+      const { questions } = state;
+      const newValue = [...questions, ...value];
+      state.questions.splice(0, questions.length, ...newValue);
     }
   },
   actions: {
     async getCategories({ commit }) {
+      const selectedCategories = [
+        "History",
+        "Mythology",
+        "Sports",
+        "Politics",
+        "General Knowledge",
+        "Geography"
+      ];
       const categories = await triviaService.getCategories();
-      commit("setCategories", categories);
+      const filteredCategories = categories.filter(category =>
+        selectedCategories.includes(category.name)
+      );
+      commit("setCategories", filteredCategories);
     },
-    async getQuestions({ state, commit, dispatch }, { category, difficulty }) {
+    async getQuestions(
+      { state, commit, dispatch },
+      { category, difficulty, amount }
+    ) {
       if (!state.categories.length) {
         await dispatch("getCategories");
       }
 
+      console.log({ difficulty });
+
       const categoryId = state.categories.find(c => c.name === category).id;
-      const response = await triviaService.getQuestions(categoryId, difficulty);
-
-      const questions = {
-        0: [],
-        1: [],
-        2: []
-      };
-
-      response.forEach(question => {
-        if (difficulty === "easy") {
-          questions["0"].push(question);
-        } else if (difficulty === "medium") {
-          questions["1"].push(question);
-        } else {
-          questions["2"].push(question);
-        }
-      });
+      const questions = await triviaService.getQuestions(
+        categoryId,
+        difficulty,
+        amount
+      );
 
       commit("setQuestions", questions);
     }
