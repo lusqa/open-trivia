@@ -23,24 +23,22 @@
         </div>
         <div class="question">
           <h4 class="question__text" v-html="actualQuestion.question" />
-          <div
-            class="question__options"
-            v-for="(option, index) in options"
-            :key="index"
-          >
+          <div class="question__options">
             <QuestionCard
+              v-for="(option, index) in options"
+              :key="index"
               id="aa"
-              :active="questionSelected === index"
+              :active="optionSelected === index"
               :index="index"
               :label="option"
-              @question-selected="questionSelected = arguments[0]"
+              @question-selected="optionSelected = arguments[0]"
             />
           </div>
           <div class="card__footer">
             <Button
               id="answerButton"
-              label="Responder"
-              :disabled="questionSelected === -1"
+              label="Answer"
+              :disabled="optionSelected === -1"
               @click="onAnswerClick"
             />
           </div>
@@ -50,18 +48,20 @@
     <portal to="root" v-if="isDialogVisible">
       <FeedbackDialog
         id="aaaa"
-        :status="isCorrectAnswer"
-        @advance-click="onAdvanceClick"
+        :is-correct="isCorrectAnswer"
+        @next-click="onNextClick"
       />
     </portal>
   </div>
 </template>
 
 <script>
-import { mapState, mapActions } from "vuex";
+import { mapState, mapMutations, mapActions } from "vuex";
 import QuestionCard from "@/components/QuestionCard";
 import FeedbackDialog from "@/components/FeedbackDialog";
 import Button from "@/components/Button";
+
+import { shuffle } from "@/utils/array.util";
 
 export default {
   name: "Trivia",
@@ -80,42 +80,128 @@ export default {
     return {
       actualIndex: 0,
       actualQuestion: "",
-      questionSelected: -1,
-      isDialogVisible: false
+      optionSelected: -1,
+      isDialogVisible: false,
+      nextDifficulty: "medium",
+      correctStrick: 0,
+      incorrectStrick: 0,
+      correctAnswers: {
+        easy: 0,
+        medium: 0,
+        hard: 0
+      },
+      incorrectAnswers: {
+        easy: 0,
+        medium: 0,
+        hard: 0
+      }
     };
   },
   async created() {
-    await this.getQuestions({ category: this.category, difficulty: "medium" });
-    [this.actualQuestion] = this.questions["1"];
+    const { category, nextDifficulty, questions, actualIndex } = this;
+    await this.getQuestions({
+      category: category,
+      difficulty: nextDifficulty
+    });
+    this.actualQuestion = questions[actualIndex];
+  },
+  watch: {
+    correctStrick: {
+      handler(newValue) {
+        if (newValue >= 2) {
+          if (this.actualQuestion.difficulty === "easy") {
+            this.nextDifficulty = "medium";
+          } else if (this.actualQuestion.difficulty === "medium") {
+            this.nextDifficulty = "hard";
+          }
+        }
+      }
+    },
+    incorrectStrick: {
+      handler(newValue) {
+        if (newValue >= 2) {
+          if (this.actualQuestion.difficulty === "medium") {
+            this.nextDifficulty = "easy";
+          } else if (this.actualQuestion.difficulty === "hard") {
+            this.nextDifficulty = "medium";
+          }
+        }
+      }
+    },
+    nextDifficulty: {
+      async handler(newValue) {
+        if (newValue) {
+          await this.getQuestions({
+            category: this.category,
+            difficulty: newValue
+          });
+        }
+      }
+    },
+    actualIndex: {
+      async handler(newValue) {
+        if (newValue === 10) {
+          this.saveCategory();
+        }
+      }
+    }
   },
   computed: {
     ...mapState("trivia", ["questions"]),
     options() {
-      return [
+      return shuffle([
         ...this.actualQuestion.incorrect_answers,
         this.actualQuestion.correct_answer
-      ];
+      ]);
     },
     isCorrectAnswer() {
-      if (
-        this.options[this.questionSelected] ===
-        this.actualQuestion.correct_answer
-      ) {
-        return "correct";
-      } else {
-        return "wrong";
-      }
+      const { options, optionSelected, actualQuestion } = this;
+      return options[optionSelected] === actualQuestion.correct_answer;
     }
   },
   methods: {
+    ...mapMutations("trivia", ["resetQuestions"]),
     ...mapActions("trivia", ["getQuestions"]),
     onAnswerClick() {
+      const { difficulty } = this.actualQuestion;
       this.isDialogVisible = true;
-      console.log({ answer: this.options[this.questionSelected] });
+      if (this.isCorrectAnswer) {
+        this.correctAnswers[difficulty]++;
+        this.correctStrick++;
+        this.incorrectStrick = 0;
+      } else {
+        this.incorrectAnswers[difficulty]++;
+        this.incorrectStrick++;
+        this.correctStrick = 0;
+      }
     },
-    onAdvanceClick() {
+    onNextClick() {
       this.isDialogVisible = false;
-      console.log({ answer: this.options[this.questionSelected] });
+      this.optionSelected = -1;
+      this.nextQuestion();
+    },
+    async nextQuestion() {
+      const { questions } = this;
+      this.actualIndex++;
+      if (this.actualIndex === this.questions.length) {
+        await this.getQuestions({
+          category: this.category,
+          difficulty: this.nextDifficulty,
+          amount: 1
+        });
+      }
+      this.actualQuestion = questions[this.actualIndex];
+    },
+    saveCategory() {
+      window.localStorage.setItem(
+        this.category,
+        JSON.stringify({
+          correctAnswers: this.correctAnswers,
+          incorrectAnswers: this.incorrectAnswers
+        })
+      );
+      this.resetQuestions();
+      this.$router.push("/");
     }
   }
 };
