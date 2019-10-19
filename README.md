@@ -1,4 +1,4 @@
-# frontend-test-sas
+# open-trivia
 
 ## Project setup
 ```
