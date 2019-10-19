@@ -4,7 +4,7 @@
     @click="onQuestionClick"
     :class="{ 'question-card--active': active }"
   >
-    <span class="question-card__label">{{ label }}</span>
+    <span class="question-card__label" v-html="label"></span>
   </div>
 </template>
 
