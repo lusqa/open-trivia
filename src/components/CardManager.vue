@@ -34,8 +34,16 @@ export default {
   },
   methods: {
     onCardClick(category) {
-      if (window.localStorage.getItem(category.name)) {
-        alert("Category Answered");
+      const categoryStorage = window.localStorage.getItem(category.name);
+      console.log({ categoryStorage });
+      if (categoryStorage) {
+        this.$router.push({
+          name: "report",
+          params: {
+            correctAnswers: JSON.parse(categoryStorage).correctAnswers,
+            incorrectAnswers: JSON.parse(categoryStorage).incorrectAnswers
+          }
+        });
       } else {
         this.$router.push({
           name: "trivia",

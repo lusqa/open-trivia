@@ -201,7 +201,13 @@ export default {
         })
       );
       this.resetQuestions();
-      this.$router.push("/");
+      this.$router.push({
+        name: "report",
+        params: {
+          correctAnswers: this.correctAnswers,
+          incorrectAnswers: this.incorrectAnswers
+        }
+      });
     }
   }
 };
