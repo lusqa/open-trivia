@@ -29,6 +29,9 @@ export default {
 <style lang="scss" scoped>
 @import "@/assets/stylesheets/colors.scss";
 
+.home {
+  width: 100%;
+}
 .page-title {
   color: $ink;
 }

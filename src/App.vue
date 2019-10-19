@@ -8,6 +8,7 @@
         <router-view />
       </template>
     </PageTemplate>
+    <portal-target name="root"></portal-target>
   </div>
 </template>
 

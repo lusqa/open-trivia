@@ -3,15 +3,26 @@
     <div class="trivia" v-if="actualQuestion">
       <div class="category__header">
         <h2 class="category__header__title">{{ category }}</h2>
-        <span class="category__header__close">Fechar</span>
+        <div
+          class="category__header__close"
+          id="closeButton"
+          @click="$router.go(-1)"
+        >
+          <img
+            src="../assets/images/close_icon.svg"
+            alt=""
+            id="closeButtonImg"
+          />
+          <span id="closeButtonText">Close</span>
+        </div>
       </div>
       <div class="card">
         <div class="card__header">
-          <h3>Question {{ actualIndex + 1 }}</h3>
-          <span>{{ actualQuestion.difficulty }}</span>
+          <h3 id="questionNumber">Question {{ actualIndex + 1 }}</h3>
+          <span id="questionDifficulty">{{ actualQuestion.difficulty }}</span>
         </div>
         <div class="question">
-          <h4 class="question__text">{{ actualQuestion.question }}</h4>
+          <h4 class="question__text" v-html="actualQuestion.question" />
           <div
             class="question__options"
             v-for="(option, index) in options"
@@ -36,12 +47,13 @@
         </div>
       </div>
     </div>
-    <FeedbackDialog
-      v-if="isDialogVisible"
-      id="aaaa"
-      :status="isCorrectAnswer"
-      @advance-click="onAdvanceClick"
-    />
+    <portal to="root" v-if="isDialogVisible">
+      <FeedbackDialog
+        id="aaaa"
+        :status="isCorrectAnswer"
+        @advance-click="onAdvanceClick"
+      />
+    </portal>
   </div>
 </template>
 
@@ -120,7 +132,7 @@ export default {
   }
 
   @media screen and (max-width: 576px) {
-    width: 526px;
+    width: 373px;
   }
 
   @media screen and (max-width: 375px) {
@@ -143,6 +155,15 @@ h4 {
     &__close {
       color: $ink;
     }
+
+    &__close {
+      display: flex;
+      align-items: center;
+
+      #closeButtonText {
+        padding-left: 10px;
+      }
+    }
   }
 }
 
@@ -157,6 +178,10 @@ h4 {
     display: flex;
     align-items: center;
     justify-content: space-between;
+
+    #questionDifficulty {
+      text-transform: capitalize;
+    }
   }
 
   &__text {
