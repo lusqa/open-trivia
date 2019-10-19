@@ -28,10 +28,10 @@ export default {
       required: true
     }
   },
+  computed: {},
   mounted() {
     console.log({ id: this.id, categories: this.categories });
   },
-  computed: {},
   methods: {
     onCardClick(category) {
       this.$router.push({
@@ -47,20 +47,32 @@ export default {
 @import "@/assets/stylesheets/colors.scss";
 
 .card-manager {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  grid-gap: 12px;
+
+  @media (max-width: 576px) {
+    grid-template-columns: repeat(3, 1fr);
+  }
+
+  @media (max-width: 375px) {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
   .card {
-    @media screen and (max-width: 992px) {
+    @media (max-width: 992px) {
       width: 210px;
     }
 
-    @media screen and (max-width: 768px) {
+    @media (max-width: 768px) {
       width: 158px;
     }
 
-    @media screen and (max-width: 576px) {
+    @media (max-width: 576px) {
       width: 165px;
     }
 
-    @media screen and (max-width: 375px) {
+    @media (max-width: 375px) {
       width: 163px;
     }
   }
