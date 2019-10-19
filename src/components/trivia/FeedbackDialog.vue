@@ -4,11 +4,7 @@
     <div class="feedback-dialog" :class="[border]">
       <img class="feedback-dialog__image" :id="id + 'Image'" :src="image" />
       <span class="feedback-dialog__label" :id="id + 'Label'">{{ label }}</span>
-      <Button
-        :id="id + 'AdvanceButton'"
-        label="Next"
-        @click="$emit('next-click')"
-      >
+      <Button :id="id + 'NextButton'" label="Next" @click="$emit('next-click')">
         <template slot="right-icon">
           <img src="@/assets/images/arrow_right.svg" />
         </template>
@@ -45,7 +41,7 @@ export default {
       return this.isCorrect ? "border--correct" : "border--wrong";
     },
     label() {
-      return this.isCorrect ? "You get!" : "You suck!";
+      return this.isCorrect ? "You got!" : "You missed!";
     }
   }
 };

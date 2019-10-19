@@ -38,16 +38,7 @@ export default {
       );
       commit("setCategories", filteredCategories);
     },
-    async getQuestions(
-      { state, commit, dispatch },
-      { category, difficulty, amount }
-    ) {
-      if (!state.categories.length) {
-        await dispatch("getCategories");
-      }
-
-      console.log({ difficulty });
-
+    async getQuestions({ state, commit }, { category, difficulty, amount }) {
       const categoryId = state.categories.find(c => c.name === category).id;
       const questions = await triviaService.getQuestions(
         categoryId,

@@ -1,27 +1,49 @@
 <template>
   <div class="report__container">
     <div class="report__blue">
-      <img src="@/assets/images/figure.svg" class="report__blue__img" />
+      <img
+        src="@/assets/images/figure.svg"
+        class="report__blue__img"
+        id="figureImg"
+      />
       <div class="report__congratulations">
-        <span class="report__congratulations__title">Congratulations!</span>
-        <span class="report__congratulations__subtitle"
-          >You finished the test
+        <span class="report__congratulations__title" id="congratulationsLabel">
+          Congratulations!
+        </span>
+        <span class="report__congratulations__subtitle" id="youFinishedLabel">
+          You finished the test
         </span>
       </div>
     </div>
     <div class="report__white">
       <div class="report__score">
-        <div class="report__score__item">
-          <span class="report__score__item__number">
+        <div class="report__score__item" id="totalCorrectAnswers">
+          <span
+            class="report__score__item__number"
+            id="totalCorrectAnswersNumber"
+          >
             {{ totalCorrectAnswers }}
           </span>
-          <span class="report__score__item__label">acertos</span>
+          <span
+            class="report__score__item__label"
+            id="totalCorrectAnswersLabel"
+          >
+            acertos
+          </span>
         </div>
         <div class="report__score__item">
-          <span class="report__score__item__number">
+          <span
+            class="report__score__item__number"
+            id="totalIncorrectAnswersNumber"
+          >
             {{ totalIncorrectAnswers }}
           </span>
-          <span class="report__score__item__label">erros</span>
+          <span
+            class="report__score__item__label"
+            id="totalIncorrectAnswersNumber"
+          >
+            erros
+          </span>
         </div>
       </div>
       <div class="report__detailed__score">
@@ -30,19 +52,32 @@
           v-for="(difficulty, index) in ['easy', 'medium', 'hard']"
           :key="index"
         >
-          <span class="report__detailed__score__item__difficulty">
+          <span
+            class="report__detailed__score__item__difficulty"
+            :id="`${difficulty}Label`"
+          >
             {{ difficulty }}
           </span>
-          <span class="report__detailed__score__item__points">
+          <span
+            class="report__detailed__score__item__points"
+            :id="`correctAnswers${difficulty}`"
+          >
             Correct: {{ correctAnswers[difficulty] }}
           </span>
-          <span class="report__detailed__score__item__points">
+          <span
+            class="report__detailed__score__item__points"
+            :id="`incorrectAnswers${difficulty}`"
+          >
             Wrong: {{ incorrectAnswers[difficulty] }}
           </span>
         </div>
       </div>
       <div class="report__go-home">
-        <Button id="aaa" label="Go back to home" @click="$router.push('/')" />
+        <Button
+          id="goBackHomeButton"
+          label="Go back to home"
+          @click="$router.push('/')"
+        />
       </div>
     </div>
   </div>

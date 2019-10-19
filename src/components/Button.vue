@@ -10,8 +10,8 @@
         'button--icon': !!$slots['right-icon']
       }"
     >
-      <span class="button__label">{{ label }}</span>
-      <slot name="right-icon"></slot>
+      <span class="button__label" :id="id + label">{{ label }}</span>
+      <slot name="right-icon" :id="id + 'RightAction'"></slot>
     </button>
   </div>
 </template>

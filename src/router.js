@@ -16,7 +16,7 @@ export default new Router({
       component: Home
     },
     {
-      path: "/trivia/:category",
+      path: "/trivia",
       props: true,
       name: "trivia",
       component: Trivia

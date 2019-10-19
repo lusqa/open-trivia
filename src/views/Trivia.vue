@@ -2,7 +2,9 @@
   <div class="trivia__container">
     <div class="trivia" v-if="actualQuestion">
       <div class="category__header">
-        <h2 class="category__header__title">{{ category }}</h2>
+        <h2 class="category__header__title" id="categoryName">
+          {{ category }}
+        </h2>
         <div
           class="category__header__close"
           id="closeButton"
@@ -27,7 +29,7 @@
             <QuestionCard
               v-for="(option, index) in options"
               :key="index"
-              id="aa"
+              :id="'questionOption' + index"
               :active="optionSelected === index"
               :index="index"
               :label="option"
@@ -47,7 +49,7 @@
     </div>
     <portal to="root" v-if="isDialogVisible">
       <FeedbackDialog
-        id="aaaa"
+        id="feedbackDialog"
         :is-correct="isCorrectAnswer"
         @next-click="onNextClick"
       />
