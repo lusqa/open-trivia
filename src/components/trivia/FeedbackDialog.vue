@@ -10,7 +10,7 @@
         @click="$emit('next-click')"
       >
         <template slot="right-icon">
-          <img src="../assets/images/arrow_right.svg" />
+          <img src="@/assets/images/arrow_right.svg" />
         </template>
       </Button>
     </div>

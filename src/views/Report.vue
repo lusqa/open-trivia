@@ -1,7 +1,7 @@
 <template>
   <div class="report__container">
     <div class="report__blue">
-      <img src="../assets/images/figure.svg" class="report__blue__img" />
+      <img src="@/assets/images/figure.svg" class="report__blue__img" />
       <div class="report__congratulations">
         <span class="report__congratulations__title">Congratulations!</span>
         <span class="report__congratulations__subtitle"

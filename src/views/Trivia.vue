@@ -9,7 +9,7 @@
           @click="$router.go(-1)"
         >
           <img
-            src="../assets/images/close_icon.svg"
+            src="@/assets/images/close_icon.svg"
             alt=""
             id="closeButtonImg"
           />
@@ -57,8 +57,8 @@
 
 <script>
 import { mapState, mapMutations, mapActions } from "vuex";
-import QuestionCard from "@/components/QuestionCard";
-import FeedbackDialog from "@/components/FeedbackDialog";
+import QuestionCard from "@/components/trivia/QuestionCard";
+import FeedbackDialog from "@/components/trivia/FeedbackDialog";
 import Button from "@/components/Button";
 
 import { shuffle } from "@/utils/array.util";

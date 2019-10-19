@@ -7,7 +7,7 @@
 
 <script>
 import { mapState, mapActions } from "vuex";
-import CardManager from "@/components/CardManager";
+import CardManager from "@/components/home/CardManager";
 
 export default {
   name: "Home",
