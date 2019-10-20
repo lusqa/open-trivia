@@ -1,9 +1,7 @@
 <template>
-  <div class="home">
-    <keep-alive>
-      <h1 class="page-title">Categories</h1>
-      <CardManager id="categoriesCard" :categories="categories" />
-    </keep-alive>
+  <div class="home" v-if="categories">
+    <h1 class="page-title">Categories</h1>
+    <CardManager id="categoriesCard" :categories="categories" />
   </div>
 </template>
 
@@ -17,7 +15,9 @@ export default {
     CardManager
   },
   async created() {
-    await this.getCategories();
+    if (!this.categories.length) {
+      await this.getCategories();
+    }
   },
   computed: {
     ...mapState("trivia", ["categories"])
