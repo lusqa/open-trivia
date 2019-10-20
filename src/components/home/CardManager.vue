@@ -35,7 +35,6 @@ export default {
   methods: {
     onCardClick(category) {
       const categoryStorage = window.localStorage.getItem(category.name);
-      console.log({ categoryStorage });
       if (categoryStorage) {
         this.$router.push({
           name: "report",

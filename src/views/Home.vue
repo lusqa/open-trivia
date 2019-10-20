@@ -1,7 +1,9 @@
 <template>
   <div class="home">
-    <h1 class="page-title">Categories</h1>
-    <CardManager id="cardManager" :categories="categories" />
+    <keep-alive>
+      <h1 class="page-title">Categories</h1>
+      <CardManager id="categoriesCard" :categories="categories" />
+    </keep-alive>
   </div>
 </template>
 
