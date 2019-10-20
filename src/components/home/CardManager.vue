@@ -29,9 +29,6 @@ export default {
     }
   },
   computed: {},
-  mounted() {
-    console.log({ id: this.id, categories: this.categories });
-  },
   methods: {
     onCardClick(category) {
       const categoryStorage = window.localStorage.getItem(category.name);
