@@ -14,8 +14,14 @@
 </template>
 
 <script>
-import feedbackCorrectImage from "@/assets/images/feedback_correct.svg";
-import feedbackWrongImage from "@/assets/images/feedback_wrong.svg";
+const feedbackCorrectImage = () =>
+  import(
+    /* webChunkName: feedbackCorrectImg */ "@/assets/images/feedback_correct.svg"
+  );
+const feedbackWrongImage = () =>
+  import(
+    /* webChunkName: feedbackCorrectImg */ "@/assets/images/feedback_wrong.svg"
+  );
 import Button from "@/components/Button";
 
 export default {
