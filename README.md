@@ -1,5 +1,7 @@
 # open-trivia
 
+[![Build Status](https://travis-ci.org/olucasgomes/open-trivia.svg?branch=master)](https://travis-ci.org/olucasgomes/open-trivia)
+
 ## Project setup
 ```
 npm install
