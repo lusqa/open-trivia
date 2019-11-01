@@ -25,6 +25,8 @@ export default {
 
   &__header {
     flex: 56px 0;
+    position: sticky;
+    top: 0;
   }
 
   &__content {

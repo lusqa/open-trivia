@@ -7,12 +7,12 @@
         id="figureImg"
       />
       <div class="report__congratulations">
-        <span class="report__congratulations__title" id="congratulationsLabel">
-          Congratulations!
-        </span>
-        <span class="report__congratulations__subtitle" id="youFinishedLabel">
-          You finished the test
-        </span>
+        <span class="report__congratulations__title" id="congratulationsLabel"
+          >Congratulations!</span
+        >
+        <span class="report__congratulations__subtitle" id="youFinishedLabel"
+          >You finished the test</span
+        >
       </div>
     </div>
     <div class="report__white">
@@ -21,29 +21,23 @@
           <span
             class="report__score__item__number"
             id="totalCorrectAnswersNumber"
+            >{{ totalCorrectAnswers }}</span
           >
-            {{ totalCorrectAnswers }}
-          </span>
-          <span
-            class="report__score__item__label"
-            id="totalCorrectAnswersLabel"
+          <span class="report__score__item__label" id="totalCorrectAnswersLabel"
+            >acertos</span
           >
-            acertos
-          </span>
         </div>
         <div class="report__score__item">
           <span
             class="report__score__item__number"
             id="totalIncorrectAnswersNumber"
+            >{{ totalIncorrectAnswers }}</span
           >
-            {{ totalIncorrectAnswers }}
-          </span>
           <span
             class="report__score__item__label"
             id="totalIncorrectAnswersNumber"
+            >erros</span
           >
-            erros
-          </span>
         </div>
       </div>
       <div class="report__detailed__score">
@@ -55,21 +49,18 @@
           <span
             class="report__detailed__score__item__difficulty"
             :id="`${difficulty}Label`"
+            >{{ difficulty }}</span
           >
-            {{ difficulty }}
-          </span>
           <span
             class="report__detailed__score__item__points"
             :id="`correctAnswers${difficulty}`"
+            >Correct: {{ correctAnswers[difficulty] }}</span
           >
-            Correct: {{ correctAnswers[difficulty] }}
-          </span>
           <span
             class="report__detailed__score__item__points"
             :id="`incorrectAnswers${difficulty}`"
+            >Wrong: {{ incorrectAnswers[difficulty] }}</span
           >
-            Wrong: {{ incorrectAnswers[difficulty] }}
-          </span>
         </div>
       </div>
       <div class="report__go-home">
@@ -135,11 +126,15 @@ export default {
 }
 
 .report__container {
-  width: 75%;
-  height: 75%;
+  width: 100%;
+  padding: 16px;
   display: flex;
   flex-direction: column;
   justify-content: center;
+
+  @media screen and (in-width: 992px) {
+    width: 75%;
+  }
 }
 
 .report {

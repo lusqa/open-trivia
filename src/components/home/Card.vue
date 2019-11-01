@@ -26,7 +26,6 @@ export default {
 
 .card {
   display: flex;
-  width: 239px;
   height: 104px;
   background-color: $white;
   border-radius: 8px;

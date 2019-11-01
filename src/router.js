@@ -16,13 +16,13 @@ export default new Router({
       component: Home
     },
     {
-      path: "/trivia",
+      path: "/trivia/:category",
       props: true,
       name: "trivia",
       component: Trivia
     },
     {
-      path: "/report",
+      path: "/report/:category",
       props: true,
       name: "report",
       component: Report

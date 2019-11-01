@@ -15,9 +15,7 @@ export default {
     CardManager
   },
   async created() {
-    if (!this.categories.length) {
-      await this.getCategories();
-    }
+    await this.getCategories();
   },
   computed: {
     ...mapState("trivia", ["categories"])
@@ -34,6 +32,10 @@ export default {
 .home {
   width: 100%;
   padding: 16px;
+
+  @media (min-width: 992px) {
+    width: 75%;
+  }
 }
 .page-title {
   color: $ink;

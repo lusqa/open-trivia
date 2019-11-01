@@ -23,22 +23,28 @@ export default {
     }
   },
   actions: {
-    async getCategories({ commit }) {
-      const selectedCategories = [
-        "History",
-        "Mythology",
-        "Sports",
-        "Politics",
-        "General Knowledge",
-        "Geography"
-      ];
-      const categories = await triviaService.getCategories();
-      const filteredCategories = categories.filter(category =>
-        selectedCategories.includes(category.name)
-      );
-      commit("setCategories", filteredCategories);
+    async getCategories({ state, commit }) {
+      if (!state.categories.length) {
+        const selectedCategories = [
+          "History",
+          "Mythology",
+          "Sports",
+          "Politics",
+          "General Knowledge",
+          "Geography"
+        ];
+        const categories = await triviaService.getCategories();
+        const filteredCategories = categories.filter(category =>
+          selectedCategories.includes(category.name)
+        );
+        commit("setCategories", filteredCategories);
+      }
     },
-    async getQuestions({ state, commit }, { category, difficulty, amount }) {
+    async getQuestions(
+      { state, commit, dispatch },
+      { category, difficulty, amount }
+    ) {
+      await dispatch("getCategories");
       const categoryId = state.categories.find(c => c.name === category).id;
       const questions = await triviaService.getQuestions(
         categoryId,

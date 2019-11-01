@@ -56,8 +56,8 @@ export default {
 
 .card-manager {
   display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  grid-column-gap: 5px;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  grid-column-gap: 15px;
 
   @media (min-width: 375px) and (max-width: 576px) {
     grid-template-columns: repeat(2, 1fr);
@@ -65,24 +65,6 @@ export default {
 
   @media (max-width: 375px) {
     grid-template-columns: repeat(2, 1fr);
-  }
-
-  .card {
-    @media (max-width: 992px) {
-      width: 210px;
-    }
-
-    @media (max-width: 768px) {
-      width: 158px;
-    }
-
-    @media (max-width: 576px) {
-      width: 165px;
-    }
-
-    @media (max-width: 375px) {
-      width: 163px;
-    }
   }
 }
 </style>

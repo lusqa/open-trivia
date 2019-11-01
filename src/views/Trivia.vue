@@ -10,11 +10,7 @@
           id="closeButton"
           @click="$router.go(-1)"
         >
-          <img
-            src="@/assets/images/close_icon.svg"
-            alt=""
-            id="closeButtonImg"
-          />
+          <img src="@/assets/images/close_icon.svg" alt id="closeButtonImg" />
           <span id="closeButtonText">Close</span>
         </div>
       </div>
@@ -218,19 +214,18 @@ export default {
 <style lang="scss" scoped>
 @import "@/assets/stylesheets/colors.scss";
 
+.trivia__container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
 .trivia {
-  width: 700px;
+  width: 100%;
+  padding: 16px;
 
-  @media screen and (max-width: 768px) {
-    width: 704px;
-  }
-
-  @media screen and (max-width: 576px) {
-    width: 373px;
-  }
-
-  @media screen and (max-width: 375px) {
-    width: 373px;
+  @media screen and (in-width: 992px) {
+    width: 70%;
   }
 }
 
