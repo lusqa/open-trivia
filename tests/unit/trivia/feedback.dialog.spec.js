@@ -4,13 +4,12 @@ import FeedbackDialog from "@/components/trivia/FeedbackDialog.vue";
 
 describe("FeedbackDialog.vue", () => {
   const id = "feedbackDialog";
-  const isCorrect = true;
   let wrapper;
   beforeEach(() => {
     wrapper = shallowMount(FeedbackDialog, {
       propsData: {
         id,
-        isCorrect
+        isCorrect: true
       }
     });
   });

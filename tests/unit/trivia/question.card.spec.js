@@ -4,7 +4,6 @@ import QuestionCard from "@/components/trivia/QuestionCard.vue";
 
 describe("QuestionCard.vue", () => {
   const id = "questionCard";
-  const active = false;
   const index = 1;
   const label = "Question Label";
   let wrapper;
@@ -12,7 +11,7 @@ describe("QuestionCard.vue", () => {
     wrapper = shallowMount(QuestionCard, {
       propsData: {
         id,
-        active,
+        active: false,
         index,
         label
       }

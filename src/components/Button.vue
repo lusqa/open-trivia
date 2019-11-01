@@ -10,7 +10,7 @@
         'button--icon': !!$slots['right-icon']
       }"
     >
-      <span class="button__label" :id="id + label">{{ label }}</span>
+      <span class="button__label" :id="id + 'Label'">{{ label }}</span>
       <slot name="right-icon" :id="id + 'RightAction'"></slot>
     </button>
   </div>
