@@ -1,10 +1,11 @@
 <template>
   <div
+    :id="id"
     class="question-card"
     :class="{ 'question-card--active': active }"
     @click="onQuestionClick"
   >
-    <span class="question-card__label" v-html="label" :id="id + label" />
+    <span class="question-card__label" v-html="label" :id="id + 'Label'" />
   </div>
 </template>
 
