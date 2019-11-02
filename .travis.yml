@@ -5,6 +5,7 @@ cache: npm
 script:
 - npm run build
 - npm run test:unit
+- npm run test:e2e
 deploy:
   provider: heroku
   api_key:
