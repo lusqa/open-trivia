@@ -15,7 +15,7 @@
   </a>
 </p>
 
-> A webapp application based in the open trivia db api
+> A quiz app made with Vue and which uses Open Trivia api
 
 ### 🏠 [Homepage](https://github.com/olucasgomes/open-trivia#readme)
 
