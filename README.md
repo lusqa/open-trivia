@@ -51,7 +51,7 @@ npm run test:unit
 ## Run e2e tests
 
 ```sh
-npm run test:unit
+npm run test:e2e
 ```
 
 ## Author
