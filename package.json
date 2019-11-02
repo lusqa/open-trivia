@@ -1,6 +1,10 @@
 {
   "name": "open-trivia",
   "version": "0.1.0",
+  "description": "A webapp application based in the open trivia db api",
+  "author": "Lucas Gomes",
+  "license": "MIT",
+  "homepage": "https://github.com/olucasgomes/open-trivia#readme",
   "scripts": {
     "postinstall": "npm run build",
     "start": "node server.js",
@@ -45,5 +49,16 @@
       "vue-cli-service lint",
       "git add"
     ]
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/olucasgomes/open-trivia.git"
+  },
+  "bugs": {
+    "url": "https://github.com/olucasgomes/open-trivia/issues"
+  },
+  "engines": {
+    "npm": ">=6.10.1",
+    "node": ">=8.16.0"
   }
 }
