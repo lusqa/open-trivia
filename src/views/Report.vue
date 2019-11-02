@@ -302,6 +302,10 @@ $neutral: #343c58;
   .report {
     &__congratulations-section {
       border-radius: 0;
+
+      &__img {
+        padding-right: 15px;
+      }
     }
     &__score-section {
       border-radius: 0;

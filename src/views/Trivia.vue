@@ -21,24 +21,26 @@
         </div>
         <div class="question">
           <h4 class="question__text" v-html="actualQuestion.question" />
-          <div class="question__options">
-            <QuestionCard
-              v-for="(option, index) in options"
-              :key="index"
-              :id="'questionOption' + index"
-              :active="optionSelected === index"
-              :index="index"
-              :label="option"
-              @question-selected="optionSelected = arguments[0]"
-            />
-          </div>
-          <div class="card__footer">
-            <Button
-              id="answerButton"
-              label="Answer"
-              :disabled="optionSelected === -1"
-              @click="onAnswerClick"
-            />
+          <div class="question__content">
+            <div class="question__options">
+              <QuestionCard
+                v-for="(option, index) in options"
+                :key="index"
+                :id="'questionOption' + index"
+                :active="optionSelected === index"
+                :index="index"
+                :label="option"
+                @question-selected="optionSelected = arguments[0]"
+              />
+            </div>
+            <div class="card__footer">
+              <Button
+                id="answerButton"
+                label="Answer"
+                :disabled="optionSelected === -1"
+                @click="onAnswerClick"
+              />
+            </div>
           </div>
         </div>
       </div>
@@ -197,17 +199,18 @@ export default {
 
 .trivia {
   width: 100%;
+  height: 100%;
   padding: 16px;
-
-  @media screen and (in-width: 992px) {
-    width: 70%;
-  }
 }
 
 h2,
 h3,
 h4 {
   font-weight: normal;
+  font-size: 19px;
+  @media (min-width: 992px) {
+    font-size: 1.5em;
+  }
 }
 .category {
   &__header {
@@ -257,6 +260,47 @@ h4 {
   &__footer {
     display: flex;
     justify-content: center;
+  }
+}
+
+@media (max-width: 414px) {
+  .trivia {
+    padding: 0;
+
+    .category {
+      &__header {
+        padding: 0 14px;
+      }
+    }
+
+    .card {
+      height: calc(100% - 55px);
+      padding: 0 24px;
+
+      .question {
+        height: 100%;
+        display: flex;
+        flex-direction: column;
+
+        &__text {
+          margin: 0;
+        }
+
+        &__content {
+          display: flex;
+          flex-direction: column;
+          justify-content: space-between;
+          height: 100%;
+          margin-bottom: 30px;
+        }
+      }
+
+      &__footer {
+        .button__container {
+          width: 300px;
+        }
+      }
+    }
   }
 }
 </style>
