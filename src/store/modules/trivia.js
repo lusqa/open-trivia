@@ -4,22 +4,26 @@ export default {
   namespaced: true,
   state: {
     categories: [],
-    questions: []
+    questions: {
+      easy: [],
+      medium: [],
+      hard: []
+    }
   },
   getters: {},
   mutations: {
     setCategories(state, value) {
-      const { categories } = state;
-      state.categories.splice(0, categories.length, ...value);
+      state.categories.splice(0, state.categories.length, ...value);
     },
     setQuestions(state, value) {
-      const { questions } = state;
-      const newValue = [...questions, ...value];
-      state.questions.splice(0, questions.length, ...newValue);
+      state.questions = { ...state.questions, ...value };
     },
     resetQuestions(state) {
-      const { questions } = state;
-      state.questions.splice(0, questions.length);
+      state.questions = {
+        easy: [],
+        medium: [],
+        hard: []
+      };
     }
   },
   actions: {
@@ -40,19 +44,18 @@ export default {
         commit("setCategories", filteredCategories);
       }
     },
-    async getQuestions(
-      { state, commit, dispatch },
-      { category, difficulty, amount }
-    ) {
+    async getQuestions({ state, commit, dispatch }, category) {
       await dispatch("getCategories");
       const categoryId = state.categories.find(c => c.name === category).id;
-      const questions = await triviaService.getQuestions(
-        categoryId,
-        difficulty,
-        amount
-      );
+      const promises = [
+        triviaService.getQuestions(categoryId, "easy"),
+        triviaService.getQuestions(categoryId, "medium"),
+        triviaService.getQuestions(categoryId, "hard")
+      ];
 
-      commit("setQuestions", questions);
+      const [easy, medium, hard] = await Promise.all(promises);
+      console.log({ easy, medium, hard });
+      commit("setQuestions", { easy, medium, hard });
     }
   }
 };

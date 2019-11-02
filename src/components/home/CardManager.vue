@@ -28,24 +28,12 @@ export default {
       required: true
     }
   },
-  computed: {},
   methods: {
-    onCardClick(category) {
-      const categoryStorage = window.localStorage.getItem(category.name);
-      if (categoryStorage) {
-        this.$router.push({
-          name: "report",
-          params: {
-            correctAnswers: JSON.parse(categoryStorage).correctAnswers,
-            incorrectAnswers: JSON.parse(categoryStorage).incorrectAnswers
-          }
-        });
-      } else {
-        this.$router.push({
-          name: "trivia",
-          params: { category: category.name }
-        });
-      }
+    onCardClick({ name }) {
+      const categoryStorage = window.localStorage.getItem(name);
+      categoryStorage
+        ? this.$router.push({ name: "report", params: { category: name } })
+        : this.$router.push({ name: "trivia", params: { category: name } });
     }
   }
 };

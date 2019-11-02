@@ -80,7 +80,7 @@ export default {
       actualQuestion: "",
       optionSelected: -1,
       isDialogVisible: false,
-      nextDifficulty: "medium",
+      difficulty: "medium",
       correctStrick: 0,
       incorrectStrick: 0,
       correctAnswers: {
@@ -96,21 +96,18 @@ export default {
     };
   },
   async created() {
-    const { category, nextDifficulty, questions, actualIndex } = this;
-    await this.getQuestions({
-      category: category,
-      difficulty: nextDifficulty
-    });
-    this.actualQuestion = questions[actualIndex];
+    const { category, difficulty } = this;
+    await this.getQuestions(category);
+    this.actualQuestion = this.questions[difficulty].pop();
   },
   watch: {
     correctStrick: {
       handler(newValue) {
         if (newValue >= 2) {
-          if (this.actualQuestion.difficulty === "easy") {
-            this.nextDifficulty = "medium";
-          } else if (this.actualQuestion.difficulty === "medium") {
-            this.nextDifficulty = "hard";
+          if (this.difficulty === "easy") {
+            this.difficulty = "medium";
+          } else if (this.difficulty === "medium") {
+            this.difficulty = "hard";
           }
         }
       }
@@ -119,20 +116,10 @@ export default {
       handler(newValue) {
         if (newValue >= 2) {
           if (this.actualQuestion.difficulty === "medium") {
-            this.nextDifficulty = "easy";
+            this.difficulty = "easy";
           } else if (this.actualQuestion.difficulty === "hard") {
-            this.nextDifficulty = "medium";
+            this.difficulty = "medium";
           }
-        }
-      }
-    },
-    nextDifficulty: {
-      async handler(newValue) {
-        if (newValue) {
-          await this.getQuestions({
-            category: this.category,
-            difficulty: newValue
-          });
         }
       }
     },
@@ -179,16 +166,9 @@ export default {
       this.nextQuestion();
     },
     async nextQuestion() {
-      const { questions } = this;
+      const { questions, difficulty } = this;
       this.actualIndex++;
-      if (this.actualIndex === this.questions.length) {
-        await this.getQuestions({
-          category: this.category,
-          difficulty: this.nextDifficulty,
-          amount: 1
-        });
-      }
-      this.actualQuestion = questions[this.actualIndex];
+      this.actualQuestion = questions[difficulty].pop();
     },
     saveCategory() {
       window.localStorage.setItem(
@@ -199,13 +179,7 @@ export default {
         })
       );
       this.resetQuestions();
-      this.$router.push({
-        name: "report",
-        params: {
-          correctAnswers: this.correctAnswers,
-          incorrectAnswers: this.incorrectAnswers
-        }
-      });
+      this.$router.push({ name: "report" });
     }
   }
 };
@@ -218,6 +192,7 @@ export default {
   display: flex;
   align-items: center;
   justify-content: center;
+  width: 700px;
 }
 
 .trivia {

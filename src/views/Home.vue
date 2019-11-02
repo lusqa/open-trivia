@@ -14,8 +14,8 @@ export default {
   components: {
     CardManager
   },
-  async created() {
-    await this.getCategories();
+  created() {
+    this.getCategories();
   },
   computed: {
     ...mapState("trivia", ["categories"])
