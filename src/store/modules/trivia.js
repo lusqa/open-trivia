@@ -54,7 +54,6 @@ export default {
       ];
 
       const [easy, medium, hard] = await Promise.all(promises);
-      console.log({ easy, medium, hard });
       commit("setQuestions", { easy, medium, hard });
     }
   }
