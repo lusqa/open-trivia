@@ -65,13 +65,13 @@
           </span>
           <span
             class="report__detailed__score__item__points"
-            :id="`correctAnswers${difficulty}`"
+            :id="`correctAnswers${capitalize(difficulty)}`"
           >
             Correct: {{ correctAnswers[difficulty] }}
           </span>
           <span
             class="report__detailed__score__item__points"
-            :id="`incorrectAnswers${difficulty}`"
+            :id="`incorrectAnswers${capitalize(difficulty)}`"
           >
             Wrong: {{ incorrectAnswers[difficulty] }}
           </span>
@@ -90,6 +90,7 @@
 
 <script>
 import Button from "@/components/Button";
+import { capitalize } from "@/utils/string.util";
 
 export default {
   name: "Results",
@@ -137,7 +138,9 @@ export default {
       );
     }
   },
-  methods: {}
+  methods: {
+    capitalize
+  }
 };
 </script>
 

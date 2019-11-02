@@ -1,6 +1,6 @@
 <template>
-  <div class="card" @click="$emit('click')">
-    <span class="card__label">{{ label }}</span>
+  <div class="card" @click="$emit('click')" :id="id">
+    <span class="card__label" :id="id + 'Label'">{{ label }}</span>
   </div>
 </template>
 

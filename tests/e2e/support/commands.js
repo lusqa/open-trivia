@@ -23,3 +23,33 @@
 //
 // -- This is will overwrite an existing command --
 // Cypress.Commands.overwrite("visit", (originalFn, url, options) => { ... })
+
+Cypress.Commands.add("getQuestions", function() {
+  cy.fixture("questions.json").then(({ results: questions }) => {
+    const medium = questions.map(question => {
+      return Object.assign({}, question, { difficulty: "medium" });
+    });
+    const hard = questions.map(question => {
+      return Object.assign({}, question, { difficulty: "hard" });
+    });
+    cy.route("https://opentdb.com/api.php?amount=10&difficulty=easy**", {
+      results: questions
+    });
+    cy.route("https://opentdb.com/api.php?amount=10&difficulty=medium**", {
+      results: medium
+    });
+    cy.route("https://opentdb.com/api.php?amount=10&difficulty=hard**", {
+      results: hard
+    });
+  });
+});
+
+Cypress.Commands.add("setReport", function(category) {
+  localStorage.setItem(
+    category,
+    JSON.stringify({
+      correctAnswers: { easy: 2, medium: 3, hard: 0 },
+      incorrectAnswers: { easy: 2, medium: 3, hard: 0 }
+    })
+  );
+});

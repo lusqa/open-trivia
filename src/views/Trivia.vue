@@ -117,9 +117,9 @@ export default {
     incorrectStrick: {
       handler(newValue) {
         if (newValue >= 2) {
-          if (this.actualQuestion.difficulty === "medium") {
+          if (this.difficulty === "medium") {
             this.difficulty = "easy";
-          } else if (this.actualQuestion.difficulty === "hard") {
+          } else if (this.difficulty === "hard") {
             this.difficulty = "medium";
           }
         }
@@ -173,7 +173,7 @@ export default {
       this.actualQuestion = questions[difficulty].pop();
     },
     saveCategory() {
-      window.localStorage.setItem(
+      localStorage.setItem(
         this.category,
         JSON.stringify({
           correctAnswers: this.correctAnswers,

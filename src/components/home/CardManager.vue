@@ -3,7 +3,7 @@
     <Card
       v-for="(category, index) in categories"
       :key="index"
-      :id="id + category.name"
+      :id="removeSpaces(id + category.name)"
       :label="category.name"
       @click="onCardClick(category)"
     />
@@ -12,6 +12,7 @@
 
 <script>
 import Card from "@/components/home/Card";
+import { removeSpaces } from "@/utils/string.util";
 
 export default {
   name: "CardManager",
@@ -29,6 +30,7 @@ export default {
     }
   },
   methods: {
+    removeSpaces,
     onCardClick({ name }) {
       const categoryStorage = window.localStorage.getItem(name);
       categoryStorage
