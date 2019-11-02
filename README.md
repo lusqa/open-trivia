@@ -19,6 +19,8 @@
 
 ### 🏠 [Homepage](https://github.com/olucasgomes/open-trivia#readme)
 
+### ✨ [Demo](https://open-trivia.herokuapp.com/)
+
 ## Prerequisites
 
 - npm >=6.10.1
