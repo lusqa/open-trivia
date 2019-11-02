@@ -1,11 +1,29 @@
 language: node_js
+
 node_js:
 - node
-cache: npm
+
+addons:
+  apt:
+    packages:
+      - libgconf-2-4
+
+cache:
+  directories:
+    - ~/.npm
+    - ~/.cache
+
+install:
+  - npm ci
+
+before_script:
+  - npm start -- --silent &
+
 script:
 - npm run build
 - npm run test:unit
 - npm run test:e2e
+
 deploy:
   provider: heroku
   api_key:

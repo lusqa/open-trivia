@@ -2,7 +2,7 @@ import { expect } from "chai";
 import { shallowMount } from "@vue/test-utils";
 import Card from "@/components/home/Card.vue";
 
-describe.only("Card.vue", () => {
+describe("Card.vue", () => {
   const id = "card";
   const label = "Card Test";
   let wrapper;
