@@ -48,9 +48,9 @@ export default {
       await dispatch("getCategories");
       const categoryId = state.categories.find(c => c.name === category).id;
       const promises = [
-        triviaService.getQuestions(categoryId, "easy"),
-        triviaService.getQuestions(categoryId, "medium"),
-        triviaService.getQuestions(categoryId, "hard")
+        triviaService.getQuestions(categoryId, "easy", 8),
+        triviaService.getQuestions(categoryId, "medium", 10),
+        triviaService.getQuestions(categoryId, "hard", 8)
       ];
 
       const [easy, medium, hard] = await Promise.all(promises);
