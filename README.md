@@ -44,6 +44,12 @@ npm run serve
 npm run build
 ```
 
+### Start the server (needs build for production)
+
+```sh
+npm start
+```
+
 ## Run unit tests
 
 ```sh
